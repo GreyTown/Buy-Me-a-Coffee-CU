@@ -1,0 +1,1 @@
+const connectWallet = document.getElementById("connect-wallet");

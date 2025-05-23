@@ -7,12 +7,19 @@ const connectButton = document.getElementById("connect-wallet");
 // so it can be potentially accessed elsewhere if needed
 let walletClient;
 
-function connect() {
+ async function connect() {
   // Check if window.ethereum is present
   if (typeof window.ethereum !== "undefined") {
     // Wallet is likely installed
-    console.log("MetaMask (or compatible wallet) is available!");
     // We'll add connection logic here later
+    
+    walletClient = createWalletClient({
+      transport: custom(window.ethereum),
+    })
+    await walletClient.requestAddresses()
+    console.log("MetaMask (or compatible wallet) is available!");
+    connectButton.innerHTML = "Connected!"; // Update button text
+  
   } else {
     // Wallet is not installed
     console.log("No wallet detected.");
